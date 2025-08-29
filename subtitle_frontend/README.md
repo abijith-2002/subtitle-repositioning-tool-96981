@@ -1,82 +1,34 @@
-# Lightweight React Template for KAVIA
+# Subtitle Repositioning Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+This app provides the UI for uploading a video and subtitle file, monitoring processing progress, previewing results, and downloading the processed subtitle from the backend FastAPI service.
 
 ## Features
+- Upload video and subtitle files
+- Create a processing job
+- Poll job status and progress
+- Show preview data (if the backend exposes it)
+- Download the processed subtitle file
+- Light/Dark theme toggle
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
-
-## Getting Started
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+## Configure Backend URL
+Create a `.env` file in this directory and set:
 ```
+REACT_APP_BACKEND_URL=http://localhost:8000
+```
+If the frontend is served from the same origin as the backend (e.g., via a reverse proxy), you can leave it empty.
 
-### Components
+See `.env.example` for reference.
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+## Scripts
+- `npm start` - start development server
+- `npm test` - run tests
+- `npm run build` - production build
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+## Expected Backend Endpoints
+The UI integrates with these endpoints (paths are relative to `REACT_APP_BACKEND_URL`):
+- `POST /api/jobs` - multipart form with fields `video` and `subtitle`, returns `{ job_id }`
+- `GET /api/jobs/{job_id}` - returns `{ status, progress, error?, result? }`
+- `GET /api/jobs/{job_id}/download` - returns processed file (as attachment)
+- `GET /api/jobs/{job_id}/preview` (optional) - returns preview data for UI display
 
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Adjust `src/api.js` if your backend uses different paths.
