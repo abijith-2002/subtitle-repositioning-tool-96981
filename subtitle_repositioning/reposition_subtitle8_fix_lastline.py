@@ -228,7 +228,9 @@ def reposition_srt(video_path: str, srt_path: str, output_ass_path: str, results
             "[Events]\n"
             "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
         )
-        for i in range(len(subs)):
+        # Iterate over 1..len(subs) because pysrt indices are 1-based and
+        # output_ass_file was sized with len(subs) + 1 accordingly.
+        for i in range(1, len(subs) + 1):
             if output_ass_file[i]:
                 f.write(output_ass_file[i])
 
@@ -331,6 +333,6 @@ def process_subtitle(video_path: str, subtitle_path: str, max_workers: int = 5) 
 if __name__ == "__main__":
     # Example paths; update as needed for local verification
     video_path = r"uploads\output.mp4"
-    sub_path = r"outputs\sample.srt"
+    sub_path = r"subtitles/Key_and_Peele_sample1.srt"
     max_workers = 4
     process_subtitle(video_path, sub_path, max_workers)
