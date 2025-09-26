@@ -1,0 +1,13 @@
+# Core runtime dependencies for reposition_subtitle8_fix_lastline.py
+
+# OpenCV for video frame access and image processing
+opencv-python>=4.8.0,<5.0.0
+
+# Numerical computations and array handling
+numpy>=1.24.0,<3.0.0
+
+# SRT subtitle parsing
+pysrt>=1.1.2,<2.0.0
+
+# RapidOCR with ONNX Runtime backend (text detection/recognition)
+rapidocr-onnxruntime>=1.4.0,<2.0.0
