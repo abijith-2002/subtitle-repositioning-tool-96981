@@ -102,6 +102,7 @@ const generateSummary = async () => {
         min_score: minScore
         }),
     });
+    if (!keywordResponse?.ok) throw new Error(`Keyword match request failed (${keywordResponse?.status})`);
     const keywordData = await keywordResponse.json();
     setKeywordMatches(keywordData);
     console.log("keyword matches",keywordData)
@@ -116,6 +117,7 @@ const generateSummary = async () => {
         min_score:minScore
         }),
     });
+    if (!summaryResponse?.ok) throw new Error(`HR summary request failed (${summaryResponse?.status})`);
     const summaryData = await summaryResponse.json();
     setSummaries(summaryData);
     
@@ -123,8 +125,9 @@ const generateSummary = async () => {
     setResultsTab('summary'); // Reset to summary tab when results are generated
     } catch (error) {
     alert('Generation failed: ' + error.message);
-    }
+    } finally {
     setLoading(false);
+    }
 };
 
 const downloadPdfReport = async () => {
@@ -193,9 +196,9 @@ const rejectedCandidates = keywordMatches.filter(match =>
 );
 
 // Sort all candidates by score for ranklist
-const rankedCandidates = [...keywordMatches].sort((a, b) => 
-    (b.result?.score || 0) - (a.result?.score || 0)
-);
+const rankedCandidates = keywordMatches
+    .filter(c => c && c.result && typeof c.result.score === 'number')
+    .sort((a, b) => b.result.score - a.result.score);
 
 const getSummaryForCandidate = (filename) => {
     return summaries.find(summary => summary.filename === filename);
