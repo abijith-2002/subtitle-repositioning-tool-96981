@@ -1,0 +1,38 @@
+1. Does the code conform to the coding standards/guidelines ?	
+2. Does the code work? Does it perform its intended function, the logic is correct etc.	
+3. Is the code written as modular as possible?	
+4. Is the global variables handled properly ?	
+5. Is there any commented code?	
+6. Do loops have a set length and correct termination conditions?	
+7. Do the names used in the functions/methods/class/variables convey the intent ?	
+8. Are there any unused variables & functions?	
+9. Is the code at the right abstraction level?	
+10. Is the code handled in such a way that any inputs or external events could not break the code ?	
+11. Is the code written considering all the depending modules and there are no impacts ?
+12. Are there any obvious optimizations that will improve performance?	
+13. Can any of the code be replaced with library or built-in functions?	
+14. Can any logging or debugging code be removed?	
+15. If working on Bug or Change Request, does this code change will impact system performance ?	
+16. Does the code capable enough to handle future scalability ? 	
+17. Does the code written in such a way it can handle speedy responses and avoid delays ?	
+18. Do comments exist and describe the intent of the code?	
+19. Are all functions commented?	
+20. Is any unusual behavior or edge-case handling described?	
+21. Are the use and function of third-party libraries documented?	
+22. Is there any incomplete code? If so, should it be removed or flagged with a suitable marker?	
+23. Are all data inputs checked (for the correct type, length, format, and range) and encoded?	
+24. Wherever third-party utilities are used, are returning errors being caught?	
+25. Are output values checked and encoded?	
+26. Are invalid parameter values handled?	
+27. Are the Authorization, Authentication and Data validation mechanisms are implemented wherever customer data and critical data are used?	
+28. Are the Data Confidentiality taken care?	
+29. Are there any indirect object references?	
+30. Is the code testable? The code should be structured so that it doesn’t add too many or hide dependencies, is unable to initialize objects, test frameworks can use methods etc.	
+31. Do tests exist, and are they comprehensive?	
+32. Do unit tests actually test that the code is performing the intended functionality?	
+33. Could any test code be replaced with the use of an existing API?	
+34. Is the Code coverage is 100% as per the unit test report ?			
+Review Error Handling				
+35. Are errors properly handled each time the function returns ?	
+36. Are errors messages conveying what exactly is the error that has occurred ?	
+37. Are resources and memory released in all error paths ?		
